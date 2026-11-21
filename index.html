@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#17151e">
+  <meta name="description" content="Tu compañera de entrenamiento en bicicleta. GPS, ritmo y motivación por voz.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="styles.css">
+  <title>ENTRENAMIENTO 🚴🏻‍♀️</title>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">TU COMPAÑERA DE RUTA</p>
+        <h1>ENTRENAMIENTO <span>🚴🏻‍♀️</span></h1>
+      </div>
+      <div class="gps-pill" id="gpsStatus"><i></i> GPS INACTIVO</div>
+    </header>
+
+    <section class="map-wrap" aria-label="Mapa del recorrido">
+      <div id="map"></div>
+      <div class="map-hint" id="mapHint">Iniciá una salida para ver tu recorrido</div>
+      <button class="locate-btn" id="centerMap" aria-label="Centrar mapa">◎</button>
+    </section>
+
+    <section class="metrics">
+      <article class="metric metric-main">
+        <span class="metric-label">VELOCIDAD ACTUAL</span>
+        <div class="metric-value"><strong id="speed">0.0</strong><small>km/h</small></div>
+        <span class="metric-sub">Máxima <b id="maxSpeed">0.0 km/h</b></span>
+      </article>
+      <article class="metric">
+        <span class="metric-label">DISTANCIA</span>
+        <div class="metric-value"><strong id="distance">0.00</strong><small>km</small></div>
+      </article>
+      <article class="metric">
+        <span class="metric-label">RITMO</span>
+        <div class="metric-value"><strong id="pace">—</strong><small>min/km</small></div>
+      </article>
+      <article class="metric">
+        <span class="metric-label">ALTITUD</span>
+        <div class="metric-value"><strong id="altitude">—</strong><small>m</small></div>
+      </article>
+      <article class="metric">
+        <span class="metric-label">DESNIVEL POSITIVO</span>
+        <div class="metric-value"><strong id="elevation">0</strong><small>m</small></div>
+      </article>
+      <article class="metric">
+        <span class="metric-label">TIEMPO</span>
+        <div class="metric-value"><strong id="elapsed">00:00</strong></div>
+      </article>
+    </section>
+
+    <section class="terrain-card" id="terrainCard">
+      <div class="terrain-icon" id="terrainIcon">↗</div>
+      <div class="coach-copy">
+        <span class="metric-label">LECTURA DEL TERRENO</span>
+        <p id="terrainMessage">Esperando datos del GPS para analizar la pendiente.</p>
+      </div>
+    </section>
+
+    <section class="coach-card">
+      <div class="coach-icon">♫</div>
+      <div class="coach-copy">
+        <span class="metric-label">ENTRENADORA</span>
+        <p id="coachMessage" aria-live="polite">Cuando estés lista, empezamos. ¡Cada pedaleada cuenta!</p>
+      </div>
+      <button class="sound-btn" id="voiceToggle" aria-label="Activar o desactivar voz" title="Voz activada">🔊</button>
+    </section>
+
+    <section class="controls">
+      <button class="primary-btn" id="startBtn">▶ INICIAR SALIDA</button>
+      <button class="secondary-btn" id="pauseBtn" disabled>Ⅱ PAUSAR</button>
+      <button class="finish-btn" id="finishBtn" disabled>■ FINALIZAR</button>
+    </section>
+
+    <section class="history">
+      <div class="section-heading">
+        <div><p class="eyebrow">TU PROGRESO</p><h2>Últimas salidas</h2></div>
+        <button id="clearHistory" class="text-btn">Borrar historial</button>
+      </div>
+      <p class="history-note">Tus salidas quedan guardadas en este iPhone. Tocá una salida para volver a ver su recorrido.</p><div id="historyList" class="history-list"><p class="empty-state">Todavía no hay salidas guardadas.</p></div>
+    </section>
+
+    <footer>
+      <p>ENTRENAMIENTO · Tu ritmo. Tu camino. Tu evolución.</p>
+      <p class="fineprint">Usá el teléfono en un soporte seguro. No mires la pantalla mientras pedaleás. El GPS web puede pausarse si bloqueás el iPhone.</p>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="app.js"></script>
+</body>
+</html>
